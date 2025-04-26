@@ -1,10 +1,21 @@
 import { useEffect } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import Homepage from "./pages/Homepage";
 
 export default function App() {
-  fetch("https://furniture-api.fly.dev/api/v1/products?limit=10&offset=0")
-    .then((response) => response.json())
-    .then((data) => console.log(data))
-    .catch((error) => console.error("Error fetching data:", error));
+  useEffect(function () {
+    fetch("https://dummyjson.com/products?limit=30&skip=0")
+      .then((res) => res.json())
+      .then((data) => console.log(data.products))
+      .catch((err) => console.log(err));
+  }, []);
 
-  return <h1>hello world</h1>;
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route index element={<Homepage />}></Route>
+      </Routes>
+    </BrowserRouter>
+  );
 }
