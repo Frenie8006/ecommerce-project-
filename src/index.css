@@ -31,3 +31,17 @@ body {
   background-color: var(--color-brand--1);
   color: var(--color-light--2);
 }
+
+.main-container {
+  padding: 0 10rem 5rem 10rem;
+}
+
+p {
+  color: var(--color-white--1);
+}
+
+a:link,
+a:visited {
+  color: var(--color-light--3);
+  text-decoration: none;
+}
