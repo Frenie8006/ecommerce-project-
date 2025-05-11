@@ -19,6 +19,7 @@ export default function App() {
             <Route index element={<Navigate to="view-product" replace />} />
             <Route path="view-product" element={<ViewProduct />} />
             <Route path=":id" element={<SelectedProduct />} />
+            <Route path="*" element={<PageNotFound />} />
           </Route>
           <Route path="testimonial" element={<Testimonial />} />
           <Route path="login" element={<Login />} />
