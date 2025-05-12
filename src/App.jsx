@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import ViewProduct from "./components/ViewProduct";
 import { ProductsProvider } from "../contexts/ProductsContext";
 import SelectedProduct from "./components/SelectedProduct";
+import Cart from "./components/Cart";
 
 export default function App() {
   return (
@@ -17,8 +18,16 @@ export default function App() {
           <Route index element={<Homepage />} />
           <Route path="products" element={<Product />}>
             <Route index element={<Navigate to="view-product" replace />} />
-            <Route path="view-product" element={<ViewProduct />} />
+            <Route
+              path="view-product"
+              element={
+                <ViewProduct>
+                  👋 Discover and purchase the finest products available
+                </ViewProduct>
+              }
+            />
             <Route path=":id" element={<SelectedProduct />} />
+            <Route path="cart" element={<Cart />} />
             <Route path="*" element={<PageNotFound />} />
           </Route>
           <Route path="testimonial" element={<Testimonial />} />
