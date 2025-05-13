@@ -1,0 +1,27 @@
+.productNav {
+  margin-top: 1rem;
+}
+
+.productNav ul {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+}
+
+.productNav ul li a:link,
+.productNav ul li a:visited {
+  background-color: #eee;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: var(--color-dark--2);
+  text-transform: uppercase;
+  font-weight: 500;
+  padding: 0.8rem 1.8rem;
+  border-radius: 5px;
+}
+
+/* CSS Modules feature */
+.productNav ul li a:global(.active) {
+  background-color: #ddd;
+}

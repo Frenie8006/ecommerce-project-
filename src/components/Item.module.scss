@@ -1,0 +1,59 @@
+.item {
+  border-right: 2px solid var(--color-light--2);
+  border-bottom: 2px solid var(--color-light--2);
+  color: var(--color-dark--2);
+  padding: 1.5rem;
+
+  display: grid;
+  grid-template-rows: auto auto auto;
+  grid-template-columns: 1fr 1fr;
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 1px;
+  height: 100%;
+  position: relative;
+  cursor: pointer;
+
+  img {
+    height: 20rem;
+    margin: 0 auto;
+    display: block;
+    grid-column: span 2;
+    margin-bottom: 3rem;
+  }
+
+  p {
+    font-size: 1.5rem;
+    color: #333;
+  }
+
+  h3 {
+    font-size: 1.6rem;
+    font-weight: bold;
+    grid-row: 3;
+    margin-top: 0.4rem;
+  }
+
+  button {
+    background-color: var(--color-brand--1);
+    border: none;
+    width: 6.5rem;
+    margin-left: auto;
+    font-size: 2rem;
+    padding: 0.5rem;
+    cursor: pointer;
+    border-radius: 4px;
+    grid-column: -2;
+    grid-row: span 2;
+  }
+
+  div {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background-color: var(--color-brand--2);
+    color: #fff;
+    font-size: 1.2rem;
+    padding: 0.4rem 1rem;
+  }
+}

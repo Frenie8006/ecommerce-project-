@@ -1,0 +1,26 @@
+.navBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 2.5rem;
+  padding: 1rem 0;
+}
+
+.navBar ul {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  list-style: none;
+  font-size: 1.6rem;
+
+  li {
+    cursor: pointer;
+
+    &:last-child a {
+      background-color: var(--color-brand--2);
+      color: var(--color-dark--0);
+      padding: 0.5rem 2rem;
+    }
+  }
+}
