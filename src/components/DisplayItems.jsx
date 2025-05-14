@@ -5,7 +5,7 @@ import styles from "./DisplayItems.module.scss";
 import Item from "./Item";
 import Spinner from "./Spinner";
 
-const MAX_ITEMS = 9; // Maximum number of items to display
+const MAX_ITEMS = 25; // Maximum number of items to display
 
 function DisplayItems() {
   const { fetchProducts, products, isLoadingProducts } = useProducts();

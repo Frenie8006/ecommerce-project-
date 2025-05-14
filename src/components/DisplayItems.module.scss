@@ -1,13 +1,16 @@
 .displayItems {
+  max-height: 100%;
   width: 100%;
   align-self: stretch;
   margin: 1rem;
   background-color: #fff;
-  overflow: hidden;
   border-radius: 10px;
+  overflow: hidden;
 
   ul {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    height: 100%;
+    overflow-y: scroll;
   }
 }

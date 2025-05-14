@@ -9,13 +9,13 @@ import Spinner from "../components/Spinner.jsx";
 
 function Homepage() {
   const navigate = useNavigate();
-  const { products, fetchProducts, isLoading } = useProducts();
+  const { products, fetchProducts, isLoadingProducts } = useProducts();
 
   useEffect(() => {
     fetchProducts(8);
   }, []);
 
-  if (isLoading) return <Spinner />;
+  if (isLoadingProducts) return <Spinner />;
 
   return (
     <>

@@ -1,5 +1,6 @@
 .sideBar {
   color: var(--color-dark--1);
+  max-height: 100%;
   width: 70rem;
   padding: 2rem 1rem;
   align-self: stretch;
@@ -10,7 +11,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: justify;
   gap: 2rem;
 
   footer {

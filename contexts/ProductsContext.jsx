@@ -9,6 +9,7 @@ const initialState = {
   isLoadingProducts: false,
   isLoadingProduct: false,
   error: "",
+  carts: [],
 };
 
 function reducer(state, action) {
@@ -32,6 +33,9 @@ function reducer(state, action) {
     case "product/loading":
       return { ...state, isLoadingProduct: true };
 
+    case "carts/loaded":
+      return { ...state, carts: action.payload };
+
     case "rejected":
       return { ...state, isLoading: false, error: action.payload };
 
@@ -49,6 +53,7 @@ function ProductsProvider({ children }) {
       selectedProduct,
       isLoadingProducts,
       isLoadingProduct,
+      carts,
     },
     dispatch,
   ] = useReducer(reducer, initialState);
@@ -87,6 +92,10 @@ function ProductsProvider({ children }) {
     }
   }
 
+  function addToCart(cartItem) {
+    dispatch({ type: "carts/loaded", payload: [...carts, cartItem] });
+  }
+
   return (
     <ProductsContext.Provider
       value={{
@@ -98,6 +107,8 @@ function ProductsProvider({ children }) {
         fetchProducts,
         getProduct,
         selectedProduct,
+        addToCart,
+        carts,
       }}
     >
       {children}

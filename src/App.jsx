@@ -28,7 +28,6 @@ export default function App() {
             />
             <Route path=":id" element={<SelectedProduct />} />
             <Route path="cart" element={<Cart />} />
-            <Route path="*" element={<PageNotFound />} />
           </Route>
           <Route path="testimonial" element={<Testimonial />} />
           <Route path="login" element={<Login />} />
