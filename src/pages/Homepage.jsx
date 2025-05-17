@@ -7,13 +7,15 @@ import { useProducts } from "../../contexts/ProductsContext.jsx";
 import { useEffect } from "react";
 import Spinner from "../components/Spinner.jsx";
 
+const MAX_ITEMS = 8; // Maximum number of items to display
+
 function Homepage() {
   const navigate = useNavigate();
   const { products, fetchProducts, isLoadingProducts } = useProducts();
 
   useEffect(() => {
     fetchProducts(8);
-  }, []);
+  }, [fetchProducts]);
 
   if (isLoadingProducts) return <Spinner />;
 

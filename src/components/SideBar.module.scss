@@ -1,12 +1,13 @@
 .sideBar {
   color: var(--color-dark--1);
   max-height: 100%;
-  width: 70rem;
+  // width: 70rem;
   padding: 2rem 1rem;
   align-self: stretch;
   background-color: #fff;
-  margin: 1rem 0 1rem 1rem;
+  // margin: 1rem 0 1rem 1rem;
   border-radius: 10px;
+  grid-area: s;
 
   display: flex;
   flex-direction: column;

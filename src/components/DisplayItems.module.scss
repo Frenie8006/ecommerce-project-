@@ -1,11 +1,12 @@
 .displayItems {
   max-height: 100%;
-  width: 100%;
+  // width: 100%;
   align-self: stretch;
-  margin: 1rem;
+  // margin: 1rem;
   background-color: #fff;
   border-radius: 10px;
   overflow: hidden;
+  grid-area: d;
 
   ul {
     display: grid;

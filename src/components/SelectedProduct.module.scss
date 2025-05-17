@@ -38,6 +38,12 @@
     margin-bottom: 2rem;
   }
 
+  small {
+    font-size: 1.2rem;
+    color: #555;
+    letter-spacing: 1px;
+  }
+
   .quantity {
     display: flex;
     width: 10rem;
@@ -60,7 +66,7 @@
     input {
       font-size: 1.4rem;
       font-weight: 300;
-      width: 40px;
+      width: 4rem;
       text-align: center;
       border: none;
       outline: none;

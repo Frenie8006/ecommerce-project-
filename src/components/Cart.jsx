@@ -3,8 +3,14 @@ import styles from "./Cart.module.scss";
 import { useProducts } from "../../contexts/ProductsContext";
 
 function Cart() {
-  const { carts } = useProducts();
+  const { carts, deleteCart } = useProducts();
   console.log(carts);
+
+  // Derive state
+  const cartSubTotal = carts
+    .reduce((sum, cart) => sum + cart.price, 0)
+    .toFixed(2);
+  const cartQuantities = carts.reduce((sum, cart) => sum + cart.quantity, 0);
 
   if (carts.length < 1) return <ViewProduct>🛒 Your cart is empty</ViewProduct>;
 
@@ -19,11 +25,18 @@ function Cart() {
           </div>
 
           <div>
-            <h2>${(cart.price * cart.quantity).toFixed(2)}</h2>
-            <button>×</button>
+            <h2>${cart.price.toFixed(2)}</h2>
+            <button onClick={() => deleteCart(cart.id)}>×</button>
           </div>
         </li>
       ))}
+
+      <li>
+        <h2>
+          Cart Subtotal: <span>${cartSubTotal}</span>
+        </h2>
+        <button>Proceed to checkout ({cartQuantities} items)</button>
+      </li>
     </ul>
   );
 }

@@ -8,11 +8,21 @@ import Spinner from "./Spinner";
 const MAX_ITEMS = 25; // Maximum number of items to display
 
 function DisplayItems() {
-  const { fetchProducts, products, isLoadingProducts } = useProducts();
+  const { fetchProducts, products, isLoadingProducts, searchQuery } =
+    useProducts();
 
-  useEffect(function () {
-    fetchProducts(MAX_ITEMS);
-  }, []);
+  const filtertedProducts = searchQuery
+    ? products.filter((product) =>
+        product.title.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    : products;
+
+  useEffect(
+    function () {
+      fetchProducts(MAX_ITEMS);
+    },
+    [fetchProducts]
+  );
 
   return (
     <div className={styles.displayItems}>
@@ -20,7 +30,7 @@ function DisplayItems() {
         <Spinner />
       ) : (
         <ul>
-          {products.map((item) => (
+          {filtertedProducts.map((item) => (
             <Item item={item} key={item.id} />
           ))}
         </ul>

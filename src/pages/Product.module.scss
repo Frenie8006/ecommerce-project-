@@ -1,7 +1,14 @@
 .productContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 35% 1fr;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "s h"
+    "s d";
+  align-items: stretch;
+  justify-content: stretch;
+  grid-gap: 1.5rem;
+
   height: 99.75rem;
   max-width: 100%;
   border-radius: 4px;

@@ -48,7 +48,7 @@ function SelectedProduct() {
     const cartItem = {
       id: selectedProduct.id,
       title: selectedProduct.title,
-      price: selectedProduct.price,
+      price: selectedProduct.price * quantity,
       image: selectedProduct.images[0],
       quantity: quantity,
     };
@@ -74,8 +74,10 @@ function SelectedProduct() {
           <h1>{selectedProduct.title}</h1>
           <p>${(selectedProduct.price * quantity).toFixed(2)}</p>
           <article>{selectedProduct.description}</article>
+          <small>{selectedProduct.stock} stocks left</small>
           <div className={styles.quantity}>
             <button onClick={decrementQuantity}>−</button>
+
             <input
               type="number"
               value={quantity}
@@ -87,7 +89,7 @@ function SelectedProduct() {
           </div>
           <div className={styles.buttons}>
             <button onClick={handleAddToCart}>Add to Cart</button>
-            <button>Buy Now</button>
+            <button>Buy it Now</button>
           </div>
         </>
       ) : (

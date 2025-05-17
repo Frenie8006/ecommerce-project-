@@ -10,6 +10,7 @@ const initialState = {
   isLoadingProduct: false,
   error: "",
   carts: [],
+  searchQuery: "",
 };
 
 function reducer(state, action) {
@@ -36,6 +37,15 @@ function reducer(state, action) {
     case "carts/loaded":
       return { ...state, carts: action.payload };
 
+    case "cart/deleted":
+      return {
+        ...state,
+        carts: state.carts.filter((cart) => cart.id !== action.payload),
+      };
+
+    case "searchProduct/set":
+      return { ...state, searchQuery: action.payload };
+
     case "rejected":
       return { ...state, isLoading: false, error: action.payload };
 
@@ -54,6 +64,7 @@ function ProductsProvider({ children }) {
       isLoadingProducts,
       isLoadingProduct,
       carts,
+      searchQuery,
     },
     dispatch,
   ] = useReducer(reducer, initialState);
@@ -96,6 +107,14 @@ function ProductsProvider({ children }) {
     dispatch({ type: "carts/loaded", payload: [...carts, cartItem] });
   }
 
+  function deleteCart(id) {
+    dispatch({ type: "cart/deleted", payload: id });
+  }
+
+  function setSearchProduct(searchQuery) {
+    dispatch({ type: "searchProduct/set", payload: searchQuery });
+  }
+
   return (
     <ProductsContext.Provider
       value={{
@@ -108,7 +127,10 @@ function ProductsProvider({ children }) {
         getProduct,
         selectedProduct,
         addToCart,
+        deleteCart,
         carts,
+        setSearchProduct,
+        searchQuery,
       }}
     >
       {children}
