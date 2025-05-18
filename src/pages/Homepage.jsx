@@ -14,8 +14,8 @@ function Homepage() {
   const { products, fetchProducts, isLoadingProducts } = useProducts();
 
   useEffect(() => {
-    fetchProducts(8);
-  }, [fetchProducts]);
+    fetchProducts(MAX_ITEMS);
+  }, []);
 
   if (isLoadingProducts) return <Spinner />;
 

@@ -70,7 +70,7 @@ function ProductsProvider({ children }) {
   ] = useReducer(reducer, initialState);
 
   async function fetchProducts(limit = null) {
-    if (products.length > 0) return; // If products are already loaded, do nothing
+    // if (products.length > 0) return; // If products are already loaded, do nothing
 
     dispatch({ type: "products/loading" });
     try {
