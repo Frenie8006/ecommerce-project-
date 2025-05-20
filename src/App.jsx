@@ -6,34 +6,45 @@ import Testimonial from "./pages/Testimonial";
 import PageNotFound from "./pages/PageNotFound";
 import Login from "./pages/Login";
 import ViewProduct from "./components/ViewProduct";
-import { ProductsProvider } from "../contexts/ProductsContext";
 import SelectedProduct from "./components/SelectedProduct";
 import Cart from "./components/Cart";
+import { ProductsProvider } from "../contexts/ProductsContext";
+import { AuthProvider } from "../contexts/FakeAuthContext";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 export default function App() {
   return (
     <BrowserRouter>
-      <ProductsProvider>
-        <Routes>
-          <Route index element={<Homepage />} />
-          <Route path="products" element={<Product />}>
-            <Route index element={<Navigate to="view-product" replace />} />
+      <AuthProvider>
+        <ProductsProvider>
+          <Routes>
+            <Route index element={<Homepage />} />
             <Route
-              path="view-product"
+              path="products"
               element={
-                <ViewProduct>
-                  👋 Discover and purchase the finest products available
-                </ViewProduct>
+                <ProtectedRoute>
+                  <Product />
+                </ProtectedRoute>
               }
-            />
-            <Route path=":id" element={<SelectedProduct />} />
-            <Route path="cart" element={<Cart />} />
-          </Route>
-          <Route path="testimonial" element={<Testimonial />} />
-          <Route path="login" element={<Login />} />
-          <Route path="*" element={<PageNotFound />} />
-        </Routes>
-      </ProductsProvider>
+            >
+              <Route index element={<Navigate to="view-product" replace />} />
+              <Route
+                path="view-product"
+                element={
+                  <ViewProduct>
+                    👋 Discover and purchase the finest products available
+                  </ViewProduct>
+                }
+              />
+              <Route path=":id" element={<SelectedProduct />} />
+              <Route path="cart" element={<Cart />} />
+            </Route>
+            <Route path="testimonial" element={<Testimonial />} />
+            <Route path="login" element={<Login />} />
+            <Route path="*" element={<PageNotFound />} />
+          </Routes>
+        </ProductsProvider>
+      </AuthProvider>
     </BrowserRouter>
   );
 }

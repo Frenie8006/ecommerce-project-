@@ -4,6 +4,7 @@ import styles from "./Homepage.module.scss";
 import Item from "../components/Item.jsx";
 import NavBar from "../components/NavBar.jsx";
 import { useProducts } from "../../contexts/ProductsContext.jsx";
+import { useAuth } from "../../contexts/FakeAuthContext.jsx";
 import { useEffect } from "react";
 import Spinner from "../components/Spinner.jsx";
 
@@ -12,10 +13,16 @@ const MAX_ITEMS = 8; // Maximum number of items to display
 function Homepage() {
   const navigate = useNavigate();
   const { products, fetchProducts, isLoadingProducts } = useProducts();
+  const { isAuthenticated } = useAuth();
 
   useEffect(() => {
     fetchProducts(MAX_ITEMS);
   }, []);
+
+  function handleClick() {
+    if (isAuthenticated) navigate("/products");
+    else navigate("/login");
+  }
 
   if (isLoadingProducts) return <Spinner />;
 
@@ -32,7 +39,7 @@ function Homepage() {
               effortlessly across a variety of categories tailored to your
               needs.
             </p>
-            <button>Start Shopping</button>
+            <button onClick={handleClick}>Start Shopping</button>
           </div>
 
           <img src="../public/undraw.svg" alt="Happy Shoppers" />
