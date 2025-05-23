@@ -25,3 +25,27 @@
 .productNav ul li a:global(.active) {
   background-color: #ddd;
 }
+
+.productNav {
+  ul {
+    li {
+      &:last-child {
+        position: relative;
+
+        span {
+          background-color: orange;
+          color: #fff;
+          border-radius: 50%;
+          font-size: 1.2rem;
+          position: absolute;
+          height: 2rem;
+          width: 2rem;
+          text-align: center;
+          top: -1.8rem;
+          right: -0.4rem;
+          z-index: 99;
+        }
+      }
+    }
+  }
+}

@@ -15,6 +15,12 @@ function reducer(state, action) {
     case "logout":
       return { ...state, user: null, isAuthenticated: false };
 
+    case "purchase":
+      return {
+        ...state,
+        user: { ...state.user, balance: state.user.balance - action.payload },
+      };
+
     default:
       throw new Error(`Unknown action type: ${action.type}`);
   }
@@ -43,8 +49,14 @@ function AuthProvider({ children }) {
     dispatch({ type: "logout" });
   }
 
+  function purchase(amount) {
+    dispatch({ type: "purchase", payload: amount });
+  }
+
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated, login, logout }}>
+    <AuthContext.Provider
+      value={{ user, isAuthenticated, login, logout, purchase }}
+    >
       {children}
     </AuthContext.Provider>
   );

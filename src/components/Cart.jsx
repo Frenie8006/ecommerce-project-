@@ -1,9 +1,12 @@
 import ViewProduct from "./ViewProduct";
 import styles from "./Cart.module.scss";
+
 import { useProducts } from "../../contexts/ProductsContext";
+import { useAuth } from "../../contexts/FakeAuthContext";
 
 function Cart() {
-  const { carts, deleteCart } = useProducts();
+  const { carts, deleteCart, deleteAllCarts } = useProducts();
+  const { user, purchase } = useAuth();
   console.log(carts);
 
   // Derive state
@@ -11,6 +14,19 @@ function Cart() {
     .reduce((sum, cart) => sum + cart.price, 0)
     .toFixed(2);
   const cartQuantities = carts.reduce((sum, cart) => sum + cart.quantity, 0);
+
+  function handleCartCheckout() {
+    if (!user) return;
+
+    if (user.balance >= cartSubTotal) {
+      purchase(cartSubTotal);
+      deleteAllCarts();
+
+      alert(
+        `You have successfully purchased ${cartQuantities} items for $${cartSubTotal}`
+      );
+    }
+  }
 
   if (carts.length < 1) return <ViewProduct>🛒 Your cart is empty</ViewProduct>;
 
@@ -35,7 +51,15 @@ function Cart() {
         <h2>
           Cart Subtotal: <span>${cartSubTotal}</span>
         </h2>
-        <button>Proceed to checkout ({cartQuantities} items)</button>
+        {user.balance < cartSubTotal && (
+          <p>Insufficient balance to complete the purchase.</p>
+        )}
+        <button
+          onClick={handleCartCheckout}
+          className={user.balance < cartSubTotal ? styles.insufficient : ""}
+        >
+          Proceed to checkout ({cartQuantities} items)
+        </button>
       </li>
     </ul>
   );

@@ -54,7 +54,7 @@ function User() {
       <div>
         <img src={user.avatar} alt={user.name} title={user.name} />
         <p>
-          <span>Balance:</span> ${user.balance}
+          <span>Balance:</span> ${user.balance.toFixed(2)}
         </p>
         <button onClick={handleLogout}>Logout</button>
       </div>

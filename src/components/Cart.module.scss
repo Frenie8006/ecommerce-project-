@@ -68,6 +68,11 @@
         }
       }
 
+      p {
+        color: orange;
+        font-size: 1.2rem;
+      }
+
       button {
         background-color: #fff;
         color: var(--color-dark--1);
@@ -82,4 +87,8 @@
       }
     }
   }
+}
+
+.insufficient:active {
+  color: red !important;
 }

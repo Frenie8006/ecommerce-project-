@@ -8,9 +8,9 @@ import Login from "./pages/Login";
 import ViewProduct from "./components/ViewProduct";
 import SelectedProduct from "./components/SelectedProduct";
 import Cart from "./components/Cart";
+import ProtectedRoute from "./components/ProtectedRoute";
 import { ProductsProvider } from "../contexts/ProductsContext";
 import { AuthProvider } from "../contexts/FakeAuthContext";
-import ProtectedRoute from "./components/ProtectedRoute";
 
 export default function App() {
   return (

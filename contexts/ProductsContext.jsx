@@ -46,6 +46,45 @@ function reducer(state, action) {
     case "searchProduct/set":
       return { ...state, searchQuery: action.payload };
 
+    case "clearCart":
+      return {
+        ...state,
+        products: state.products.map((product) => {
+          // Check if product exists in the cart
+          const cartItem = state.carts.find((cart) => cart.id === product.id);
+
+          if (cartItem) {
+            return {
+              ...product,
+              stock: product.stock - cartItem.quantity,
+            };
+          }
+
+          // Otherwise, return the product unchanged
+          return product;
+        }),
+        carts: [],
+      };
+
+    case "product/purchased": {
+      const { productId, quantity } = action.payload;
+
+      const updatedProducts = state.products.map((product) => {
+        if (product.id === productId) {
+          return {
+            ...product,
+            stock: Math.max(0, product.stock - quantity),
+          };
+        }
+        return product;
+      });
+
+      return {
+        ...state,
+        products: updatedProducts,
+      };
+    }
+
     case "rejected":
       return { ...state, isLoading: false, error: action.payload };
 
@@ -115,6 +154,17 @@ function ProductsProvider({ children }) {
     dispatch({ type: "searchProduct/set", payload: searchQuery });
   }
 
+  function deleteAllCarts() {
+    dispatch({ type: "clearCart" });
+  }
+
+  function purchaseSelectedProduct(quantity) {
+    dispatch({
+      type: "product/purchased",
+      payload: { productId: selectedProduct.id, quantity },
+    });
+  }
+
   return (
     <ProductsContext.Provider
       value={{
@@ -131,6 +181,8 @@ function ProductsProvider({ children }) {
         carts,
         setSearchProduct,
         searchQuery,
+        deleteAllCarts,
+        purchaseSelectedProduct,
       }}
     >
       {children}
