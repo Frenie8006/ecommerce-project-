@@ -22,7 +22,7 @@ Build a simplified e-commerce platform where users can:
 <!-- https://www.behance.net/gallery/221164361/Furniture-Customisation-Web-App-Vero?tracking_source=search_projects|ecommerce+web+design&l=1https://www.behance.net/gallery/221164361/Furniture-Customisation-Web-App-Vero?tracking_source=search_projects|ecommerce+web+design&l=1 -->
 
 <!-- https://undraw.co/illustrations/15 -->
-<!-- https://calltoinspiration.com/ -->
+<!-- `https://calltoinspiration.com`/ -->
 <!-- https://lookup.design/ -->
 
 <!-- roadmap.sh -->

@@ -40,31 +40,34 @@ function reducer(state, action) {
     case "cart/deleted":
       return {
         ...state,
-        carts: state.carts.filter((cart) => cart.id !== action.payload),
+        carts: state.carts.filter((cart) => cart.cartItemId !== action.payload),
       };
 
     case "searchProduct/set":
       return { ...state, searchQuery: action.payload };
 
-    case "clearCart":
+    case "clearCart": {
+      // Sum quantities for each productId in the cart
+      const cartQuantities = state.carts.reduce((acc, cart) => {
+        acc[cart.productId] = (acc[cart.productId] || 0) + cart.quantity;
+        return acc;
+      }, {});
+
       return {
         ...state,
         products: state.products.map((product) => {
-          // Check if product exists in the cart
-          const cartItem = state.carts.find((cart) => cart.id === product.id);
-
-          if (cartItem) {
+          const totalCartQuantity = cartQuantities[product.id] || 0;
+          if (totalCartQuantity > 0) {
             return {
               ...product,
-              stock: product.stock - cartItem.quantity,
+              stock: product.stock - totalCartQuantity,
             };
           }
-
-          // Otherwise, return the product unchanged
           return product;
         }),
         carts: [],
       };
+    }
 
     case "product/purchased": {
       const { productId, quantity } = action.payload;

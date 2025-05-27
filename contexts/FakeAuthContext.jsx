@@ -31,7 +31,7 @@ const FAKE_USER = {
   password: "eatmynut135",
   email: "seonitabatucan57@gmail.com",
   avatar: "https://i.pravatar.cc/100?u=zz",
-  balance: 5000,
+  balance: 15000,
 };
 
 function AuthProvider({ children }) {

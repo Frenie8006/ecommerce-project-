@@ -42,7 +42,7 @@ function Cart() {
 
           <div>
             <h2>${cart.price.toFixed(2)}</h2>
-            <button onClick={() => deleteCart(cart.id)}>×</button>
+            <button onClick={() => deleteCart(cart.cartItemId)}>×</button>
           </div>
         </li>
       ))}

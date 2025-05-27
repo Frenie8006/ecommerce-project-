@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import styles from "./Item.module.scss";
+// import { FixedSizeList as List } from "react-window";
 
 // This will prevent from re-rendering every time the Item is clicked. This called Optimization Trick With children
 function ItemHandle({ children, item }) {
@@ -21,7 +22,11 @@ function ItemHandle({ children, item }) {
 function Item({ item }) {
   return (
     <ItemHandle item={item}>
-      <img src={item.images[0]} alt={item.name} />
+      {!item.images[0] ? (
+        <p>Loading image...</p>
+      ) : (
+        <img src={item.images[0]} alt={item.name} />
+      )}
       <p>{item.title}</p>
       <h3>${item.price}</h3>
       <button title="Add to cart">🛒</button>

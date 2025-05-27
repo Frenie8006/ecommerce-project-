@@ -31,7 +31,7 @@ function SelectedProduct() {
     [id, setQuantity]
   );
 
-  console.log(selectedProduct); // Log the selected product details
+  console.log(selectedProduct);
 
   function incrementQuantity() {
     if (quantity < selectedProduct.stock)
@@ -48,7 +48,10 @@ function SelectedProduct() {
     purchaseSelectedProduct(quantity);
     setQuantity(1);
 
-    if (user.balance >= selectedProduct.price * quantity) {
+    if (
+      user.balance >= selectedProduct.price * quantity &&
+      selectedProduct.stock > 0
+    ) {
       purchase(selectedProduct.price * quantity);
 
       alert(
@@ -56,6 +59,8 @@ function SelectedProduct() {
           selectedProduct.title
         } for $${selectedProduct.price.toFixed(2)}`
       );
+    } else if (selectedProduct.stock === 0) {
+      alert("This product is out of stock.");
     } else {
       alert(
         `You have insufficient balance to complete the purchase. Your balance is $${user.balance.toFixed(
@@ -66,25 +71,31 @@ function SelectedProduct() {
   }
 
   function handleChange(e) {
-    const value = e.target.value;
+    const value = Number(e.target.value);
 
-    if (value > selectedProduct.stock) {
-      setQuantity(selectedProduct.stock);
-    } else if (Number(value) < 1) {
+    if (value > productStock) {
+      setQuantity(productStock);
+    } else if (value < 1) {
       setQuantity(1);
     } else {
-      setQuantity(e.target.value);
+      setQuantity(value);
     }
   }
 
   function handleAddToCart() {
     const cartItem = {
-      id: selectedProduct.id,
+      cartItemId: `${selectedProduct.id}-${Date.now()}`, // Unique cart item id
+      productId: selectedProduct.id, // Keep reference to product id
       title: selectedProduct.title,
       price: selectedProduct.price * quantity,
       image: selectedProduct.images[0],
       quantity: quantity,
     };
+
+    if (Number(selectedProduct.stock) === 0) {
+      alert("This product is out of stock.");
+      return;
+    }
 
     addToCart(cartItem);
     navigate("/products/cart");
