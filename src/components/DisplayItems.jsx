@@ -21,9 +21,12 @@ function DisplayItems() {
   // useEffect is the correct hook for performing side effects such as API calls.
   // To persist products across page switches, store them in context (which you already do with ProductsContext).
   // When you navigate away and return, the context will retain the products unless the context provider is unmounted.
-  useEffect(function () {
-    fetchProducts(MAX_ITEMS);
-  }, []);
+  useEffect(
+    function () {
+      fetchProducts(MAX_ITEMS);
+    },
+    [fetchProducts]
+  );
 
   return (
     <div className={styles.displayItems}>

@@ -30,7 +30,12 @@ function Item({ item }) {
       <p>{item.title}</p>
       <h3>${item.price}</h3>
       <button title="Add to cart">🛒</button>
-      <div>{item.category}</div>
+      <div className={styles.item__category}>{item.category}</div>
+      {item.stock === 0 ? (
+        <div className={styles.item__soldout}>
+          <p>Sold out</p>
+        </div>
+      ) : null}
     </ItemHandle>
   );
 }

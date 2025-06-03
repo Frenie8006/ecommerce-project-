@@ -15,6 +15,7 @@ function SelectedProduct() {
     addToCart,
     products,
     purchaseSelectedProduct,
+    productQuantity,
   } = useProducts();
   const { user, purchase } = useAuth();
   const navigate = useNavigate();
@@ -28,13 +29,11 @@ function SelectedProduct() {
       getProduct(id); // Fetch the product details using the id
       setQuantity(1);
     },
-    [id, setQuantity]
+    [id, setQuantity, getProduct]
   );
 
-  console.log(selectedProduct);
-
   function incrementQuantity() {
-    if (quantity < selectedProduct.stock)
+    if (quantity < productStock)
       setQuantity((prevQuantity) => prevQuantity + 1); // Increment quantity
   }
 
@@ -48,10 +47,7 @@ function SelectedProduct() {
     purchaseSelectedProduct(quantity);
     setQuantity(1);
 
-    if (
-      user.balance >= selectedProduct.price * quantity &&
-      selectedProduct.stock > 0
-    ) {
+    if (user.balance >= selectedProduct.price * quantity && productStock > 0) {
       purchase(selectedProduct.price * quantity);
 
       alert(
@@ -59,7 +55,7 @@ function SelectedProduct() {
           selectedProduct.title
         } for $${selectedProduct.price.toFixed(2)}`
       );
-    } else if (selectedProduct.stock === 0) {
+    } else if (productStock === 0) {
       alert("This product is out of stock.");
     } else {
       alert(
@@ -92,7 +88,7 @@ function SelectedProduct() {
       quantity: quantity,
     };
 
-    if (Number(selectedProduct.stock) === 0) {
+    if (Number(productStock) === 0) {
       alert("This product is out of stock.");
       return;
     }
@@ -100,6 +96,10 @@ function SelectedProduct() {
     addToCart(cartItem);
     navigate("/products/cart");
   }
+
+  useEffect(() => {
+    productQuantity(quantity);
+  }, [quantity, productQuantity]);
 
   return (
     <div className={styles.selectedProduct}>

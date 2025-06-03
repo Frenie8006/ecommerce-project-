@@ -13,19 +13,19 @@ const MAX_ITEMS = 8; // Maximum number of items to display
 
 function Homepage() {
   const navigate = useNavigate();
-  const { products, fetchProducts, isLoadingProducts } = useProducts();
+  const { products, fetchProducts } = useProducts();
   const { isAuthenticated } = useAuth();
 
   useEffect(() => {
     fetchProducts(MAX_ITEMS);
-  }, []);
+  }, [fetchProducts]);
 
   function handleClick() {
     if (isAuthenticated) navigate("/products");
     else navigate("/login");
   }
 
-  if (isLoadingProducts) return <Spinner />;
+  // if (isLoadingProducts) return <Spinner />;
 
   return (
     <>

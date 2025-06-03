@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { createContext, useContext, useReducer } from "react";
 
 const ProductsContext = createContext();
@@ -11,6 +12,7 @@ const initialState = {
   error: "",
   carts: [],
   searchQuery: "",
+  productQuantity: 1,
 };
 
 function reducer(state, action) {
@@ -35,36 +37,68 @@ function reducer(state, action) {
       return { ...state, isLoadingProduct: true };
 
     case "carts/loaded":
-      return { ...state, carts: action.payload };
+      return {
+        ...state,
+        carts: action.payload,
+        products: state.products.map((product) => {
+          const cartItem = action.payload.find(
+            (cart) => cart.productId === product.id
+          );
+
+          console.log(state.productQuantity);
+
+          if (cartItem) {
+            return {
+              ...product,
+              stock: Math.max(0, product.stock - state.productQuantity),
+            };
+          } else {
+            return product; // No cart item for this product, return unchanged
+          }
+        }),
+      };
 
     case "cart/deleted":
       return {
         ...state,
         carts: state.carts.filter((cart) => cart.cartItemId !== action.payload),
+        products: state.products.map((product) => {
+          const deletedCartItem = state.carts.find(
+            (cart) => cart.cartItemId === action.payload
+          );
+
+          if (deletedCartItem && deletedCartItem.productId === product.id) {
+            return {
+              ...product,
+              stock: product.stock + deletedCartItem.quantity,
+            };
+          }
+          return product; // No change for this product
+        }),
       };
 
     case "searchProduct/set":
       return { ...state, searchQuery: action.payload };
 
     case "clearCart": {
-      // Sum quantities for each productId in the cart
-      const cartQuantities = state.carts.reduce((acc, cart) => {
-        acc[cart.productId] = (acc[cart.productId] || 0) + cart.quantity;
-        return acc;
-      }, {});
+      // // Sum quantities for each productId in the cart
+      // const cartQuantities = state.carts.reduce((acc, cart) => {
+      //   acc[cart.productId] = (acc[cart.productId] || 0) + cart.quantity;
+      //   return acc;
+      // }, {});
 
       return {
         ...state,
-        products: state.products.map((product) => {
-          const totalCartQuantity = cartQuantities[product.id] || 0;
-          if (totalCartQuantity > 0) {
-            return {
-              ...product,
-              stock: product.stock - totalCartQuantity,
-            };
-          }
-          return product;
-        }),
+        // products: state.products.map((product) => {
+        //   const totalCartQuantity = cartQuantities[product.id] || 0;
+        //   if (totalCartQuantity > 0) {
+        //     return {
+        //       ...product,
+        //       stock: product.stock - totalCartQuantity,
+        //     };
+        //   }
+        //   return product;
+        // }),
         carts: [],
       };
     }
@@ -87,6 +121,9 @@ function reducer(state, action) {
         products: updatedProducts,
       };
     }
+
+    case "product/quantity/set":
+      return { ...state, productQuantity: action.payload };
 
     case "rejected":
       return { ...state, isLoading: false, error: action.payload };
@@ -111,7 +148,7 @@ function ProductsProvider({ children }) {
     dispatch,
   ] = useReducer(reducer, initialState);
 
-  async function fetchProducts(limit = null) {
+  const fetchProducts = useCallback(async function fetchProducts(limit = null) {
     // if (products.length > 0) return; // If products are already loaded, do nothing
 
     dispatch({ type: "products/loading" });
@@ -127,23 +164,26 @@ function ProductsProvider({ children }) {
         payload: "There was an error loading products...",
       });
     }
-  }
+  }, []);
 
-  async function getProduct(id) {
-    if (+id === selectedProduct.id) return; // If the product is already selected, do nothing
+  const getProduct = useCallback(
+    async function getProduct(id) {
+      if (+id === selectedProduct.id) return; // If the product is already selected, do nothing
 
-    dispatch({ type: "product/loading" });
-    try {
-      const res = await fetch(`https://dummyjson.com/products/${id}`);
-      const data = await res.json();
-      dispatch({ type: "product/loaded", payload: data });
-    } catch {
-      dispatch({
-        type: "rejected",
-        payload: "There was an error loading product...",
-      });
-    }
-  }
+      dispatch({ type: "product/loading" });
+      try {
+        const res = await fetch(`https://dummyjson.com/products/${id}`);
+        const data = await res.json();
+        dispatch({ type: "product/loaded", payload: data });
+      } catch {
+        dispatch({
+          type: "rejected",
+          payload: "There was an error loading product...",
+        });
+      }
+    },
+    [selectedProduct.id]
+  );
 
   function addToCart(cartItem) {
     dispatch({ type: "carts/loaded", payload: [...carts, cartItem] });
@@ -168,6 +208,11 @@ function ProductsProvider({ children }) {
     });
   }
 
+  // My strange implementation of product quantity
+  const productQuantity = useCallback(function productQuantity(quantity) {
+    dispatch({ type: "product/quantity/set", payload: quantity });
+  }, []);
+
   return (
     <ProductsContext.Provider
       value={{
@@ -186,6 +231,7 @@ function ProductsProvider({ children }) {
         searchQuery,
         deleteAllCarts,
         purchaseSelectedProduct,
+        productQuantity,
       }}
     >
       {children}

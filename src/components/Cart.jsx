@@ -7,7 +7,6 @@ import { useAuth } from "../../contexts/FakeAuthContext";
 function Cart() {
   const { carts, deleteCart, deleteAllCarts } = useProducts();
   const { user, purchase } = useAuth();
-  console.log(carts);
 
   // Derive state
   const cartSubTotal = carts
