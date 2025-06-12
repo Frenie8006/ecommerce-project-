@@ -26,6 +26,7 @@ function Testimonial() {
   const [avatar, setAvatar] = useState("");
   const [role, setRole] = useState("");
 
+  // Fetching the useAuth if it's true and store its values to local useStates
   useEffect(() => {
     if (isAuthenticated) {
       setName(user?.name);
@@ -33,8 +34,6 @@ function Testimonial() {
       setAvatar(user?.avatar);
     }
   }, [isAuthenticated, user?.name, user?.role, user?.avatar]);
-
-  console.log(message.length);
 
   const goToNextSlide = useCallback(() => {
     setCurSlide((prev) => (prev >= maxSlide - 1 ? 0 : prev + 1));
