@@ -91,7 +91,7 @@ function Testimonial() {
       <main className="main-container">
         <NavBar />
 
-        <section>
+        <section className="testimonial-container">
           <div className={styles.testimonials}>
             {testimonials.map((testimonial, i) => {
               const { id, name, role, image, message, rating } = testimonial;
@@ -113,13 +113,14 @@ function Testimonial() {
                   </div>
 
                   <blockquote>
-                    <span role="img" aria-label="left quote">
+                    {/* <span role="img" aria-label="left quote">
                       “
-                    </span>{" "}
-                    {message}{" "}
+                    </span>{" "} */}
+                    {message}
+                    {/* {" "}
                     <span role="img" aria-label="right quote">
                       ”
-                    </span>
+                    </span> */}
                   </blockquote>
                   <div className={styles.testimonials__dots}>
                     {testimonials.map((dot) => {
@@ -147,6 +148,7 @@ function Testimonial() {
             onSubmit={handleSubmit}
           >
             <StarRating
+              className={styles.testimonials__addTestimonial__starRating}
               messages={messages}
               size={30}
               color="var(--color-brand--2)"

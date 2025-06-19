@@ -1,10 +1,10 @@
 import { lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
-import { ProductsProvider } from "../contexts/ProductsContext";
-import { AuthProvider } from "../contexts/FakeAuthContext";
-import { TestimonialsProvider } from "../contexts/TestimonialsContext";
 import ProtectedRoute from "./components/ProtectedRoute";
+import { AuthProvider } from "../contexts/FakeAuthContext";
+import { ProductsProvider } from "../contexts/ProductsContext";
+import { TestimonialsProvider } from "../contexts/TestimonialsContext";
 
 const Homepage = lazy(() => import("./pages/Homepage"));
 const Product = lazy(() => import("./pages/Product"));

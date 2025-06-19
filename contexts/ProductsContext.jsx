@@ -1,5 +1,10 @@
-import { useCallback } from "react";
-import { createContext, useContext, useReducer } from "react";
+import {
+  createContext,
+  useContext,
+  useReducer,
+  useCallback,
+  useMemo,
+} from "react";
 
 const ProductsContext = createContext();
 
@@ -185,9 +190,12 @@ function ProductsProvider({ children }) {
     [selectedProduct.id]
   );
 
-  function addToCart(cartItem) {
-    dispatch({ type: "carts/loaded", payload: [...carts, cartItem] });
-  }
+  const addToCart = useCallback(
+    function addToCart(cartItem) {
+      dispatch({ type: "carts/loaded", payload: [...carts, cartItem] });
+    },
+    [carts]
+  );
 
   function deleteCart(id) {
     dispatch({ type: "cart/deleted", payload: id });
@@ -201,39 +209,58 @@ function ProductsProvider({ children }) {
     dispatch({ type: "clearCart" });
   }
 
-  function purchaseSelectedProduct(quantity) {
-    dispatch({
-      type: "product/purchased",
-      payload: { productId: selectedProduct.id, quantity },
-    });
-  }
+  const purchaseSelectedProduct = useCallback(
+    function purchaseSelectedProduct(quantity) {
+      dispatch({
+        type: "product/purchased",
+        payload: { productId: selectedProduct.id, quantity },
+      });
+    },
+    [selectedProduct]
+  );
 
   // My strange implementation of product quantity
   const productQuantity = useCallback(function productQuantity(quantity) {
     dispatch({ type: "product/quantity/set", payload: quantity });
   }, []);
 
+  const value = useMemo(() => {
+    return {
+      products,
+      isLoading,
+      isLoadingProducts,
+      isLoadingProduct,
+      error,
+      fetchProducts,
+      getProduct,
+      selectedProduct,
+      addToCart,
+      deleteCart,
+      carts,
+      setSearchProduct,
+      searchQuery,
+      deleteAllCarts,
+      purchaseSelectedProduct,
+      productQuantity,
+    };
+  }, [
+    addToCart,
+    carts,
+    error,
+    fetchProducts,
+    isLoading,
+    isLoadingProducts,
+    isLoadingProduct,
+    productQuantity,
+    purchaseSelectedProduct,
+    searchQuery,
+    selectedProduct,
+    getProduct,
+    products,
+  ]);
+
   return (
-    <ProductsContext.Provider
-      value={{
-        products,
-        isLoading,
-        isLoadingProducts,
-        isLoadingProduct,
-        error,
-        fetchProducts,
-        getProduct,
-        selectedProduct,
-        addToCart,
-        deleteCart,
-        carts,
-        setSearchProduct,
-        searchQuery,
-        deleteAllCarts,
-        purchaseSelectedProduct,
-        productQuantity,
-      }}
-    >
+    <ProductsContext.Provider value={value}>
       {children}
     </ProductsContext.Provider>
   );

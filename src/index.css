@@ -12,6 +12,7 @@
   --color-light--1: #aaa;
   --color-light--2: #ececec;
   --color-light--3: #d6dee0;
+  --color-white--1: #fff;
 
   --font-style--1: "Poppins", sans-serif;
   --font-style--2: "Roboto", sans-serif;
@@ -34,6 +35,8 @@ body {
   line-height: 1.5;
   background-color: var(--color-brand--1);
   color: var(--color-light--2);
+  position: relative;
+  overflow-x: hidden;
 }
 
 main {
@@ -45,6 +48,13 @@ main {
   padding: 0 10rem 5rem 10rem;
 }
 
+.testimonial-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 p {
   color: var(--color-white--1);
 }
@@ -53,4 +63,35 @@ a:link,
 a:visited {
   color: var(--color-light--3);
   text-decoration: none;
+}
+
+/*** MEDIA QUERY ***/
+@media only screen and (max-width: 67.31em) {
+  html {
+    font-size: 58%;
+  }
+}
+
+@media only screen and (max-width: 62.5em) {
+  html {
+    font-size: 55%;
+  }
+}
+
+@media only screen and (max-width: 58.62em) {
+  html {
+    font-size: 50%;
+  }
+}
+
+@media only screen and (max-width: 46.56em) {
+  html {
+    font-size: 48%;
+  }
+}
+
+@media only screen and (max-width: 39.81em) {
+  html {
+    font-size: 45%;
+  }
 }

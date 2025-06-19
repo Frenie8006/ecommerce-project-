@@ -13,9 +13,29 @@
   gap: 2rem;
   list-style: none;
   font-size: 1.6rem;
+  transition: all 0.3s;
+
+  @media only screen and (max-width: 46.56em) {
+    // display: none;
+    background-color: #fff;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 40%;
+    height: 100vh;
+    z-index: 99;
+    box-shadow: 0 0 16px rgba(0, 0, 0, 0.28);
+    transform: translateX(100%);
+  }
 
   li {
     cursor: pointer;
+    a {
+      @media only screen and (max-width: 46.56em) {
+        color: #222;
+      }
+    }
 
     &:last-child a {
       background-color: var(--color-brand--2);
@@ -23,4 +43,8 @@
       padding: 0.5rem 2rem;
     }
   }
+}
+
+.navBar .activeMenu {
+  transform: translateX(1%);
 }

@@ -39,6 +39,14 @@ function User() {
   return (
     <header className={styles.user}>
       <div>
+        <img src={user.avatar} alt={user.name} title={user.name} />
+        <p>
+          <span>Balance:</span> ${user.balance.toFixed(2)}
+        </p>
+        <button onClick={handleLogout}>Logout</button>
+      </div>
+      {/* <hr /> */}
+      <div>
         <label htmlFor="search">
           <ion-icon name="search-outline"></ion-icon>
         </label>
@@ -49,14 +57,6 @@ function User() {
           value={searchQuery}
           placeholder="Search products by keyword"
         />
-      </div>
-      <hr />
-      <div>
-        <img src={user.avatar} alt={user.name} title={user.name} />
-        <p>
-          <span>Balance:</span> ${user.balance.toFixed(2)}
-        </p>
-        <button onClick={handleLogout}>Logout</button>
       </div>
     </header>
   );

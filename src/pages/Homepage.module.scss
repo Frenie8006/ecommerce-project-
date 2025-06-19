@@ -5,13 +5,26 @@ main {
 .homepage {
   padding: 0 10rem 5rem 10rem;
 
+  @media only screen and (max-width: 39.81em) {
+    padding: 0 5rem 5rem 5rem;
+  }
+
   &__hero {
     display: flex;
     align-items: center;
     margin-top: 2rem;
 
+    @media only screen and (max-width: 46.56em) {
+      flex-wrap: wrap;
+      margin-top: 5rem;
+    }
+
     div {
       width: 50%;
+
+      @media only screen and (max-width: 46.56em) {
+        width: 100%;
+      }
 
       h1 {
         font-size: 4.5rem;
@@ -30,6 +43,10 @@ main {
       height: 40rem;
       width: 40rem;
       margin-left: auto;
+
+      @media only screen and (max-width: 46.56em) {
+        margin: 0 auto;
+      }
     }
 
     button {
@@ -48,6 +65,10 @@ main {
   &__featured {
     margin-top: 2rem;
 
+    @media only screen and (max-width: 58.62em) {
+      margin-top: 5rem;
+    }
+
     p {
       font-size: 1.4rem;
       margin-bottom: 2.5rem;
@@ -60,9 +81,25 @@ main {
       justify-content: center;
       gap: 5rem;
 
+      @media only screen and (max-width: 36.25em) {
+        flex-wrap: wrap;
+        row-gap: 2rem;
+        column-gap: 5rem;
+      }
+
       img {
         width: 15rem;
         filter: brightness(0) invert(1);
+
+        @media only screen and (max-width: 58.62em) {
+          width: 10rem;
+        }
+
+        @media only screen and (max-width: 36.25em) {
+          width: 8rem;
+          display: flex;
+          flex-wrap: wrap;
+        }
       }
     }
   }
@@ -92,6 +129,7 @@ main {
     justify-content: center;
     gap: 5rem;
     list-style: none;
+    flex-wrap: wrap;
 
     li {
       div {
@@ -140,14 +178,7 @@ main {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
-
-    @media screen and (max-width: 1024px) {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    @media screen and (max-width: 768px) {
-      grid-template-columns: 1fr;
-    }
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
   }
 
   &__header {

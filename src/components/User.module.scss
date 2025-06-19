@@ -13,6 +13,10 @@
   justify-content: space-between;
   flex-wrap: wrap;
 
+  @media only screen and (max-width: 43.75em) {
+    height: 15rem;
+  }
+
   hr {
     background-color: #ddd;
     border: none;
@@ -21,10 +25,19 @@
   }
 
   div {
-    &:first-child {
+    &:last-child {
       position: relative;
       max-width: 45rem;
       width: 100%;
+
+      @media only screen and (max-width: 86.87em) {
+        max-width: 50rem;
+      }
+
+      @media only screen and (max-width: 43.75em) {
+        max-width: 100%;
+        margin-top: 1rem;
+      }
 
       input {
         width: 100%;
@@ -50,15 +63,23 @@
       }
     }
 
-    &:last-child {
+    &:first-child {
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: space-between;
       background-color: var(--color-brand--1);
       color: #fff;
       padding: 1rem 2rem;
       border-radius: 1rem;
       gap: 1rem;
+
+      @media only screen and (max-width: 86.87em) {
+        width: 40%;
+      }
+
+      @media only screen and (max-width: 43.75em) {
+        width: 100%;
+      }
 
       img {
         height: 4.5rem;
@@ -68,6 +89,7 @@
 
       p {
         font-size: 1.4rem;
+        margin-right: auto;
 
         span {
           font-weight: 600;
