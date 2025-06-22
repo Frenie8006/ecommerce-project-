@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Sophia Reyes",
+    "role": "Small Business Owner – Handmade Crafts",
+    "message": "Using this platform completely transformed the way I sell my products. The interface is smooth, fast, and beautifully designed. I especially love how easy it is to manage inventory and check out. I’m seriously impressed — this feels like a professional-grade e-commerce site!",
+    "image": "https://i.pravatar.cc/100?img=47",
+    "id": "1",
+    "rating": 5
+  },
+  {
+    "name": "Jake Tan",
+    "role": "Frontend Developer & UI/UX Enthusiast",
+    "message": "I’ve seen a lot of e-commerce platforms, but this one stands out. The responsiveness, component optimization, and attention to user experience are clearly well thought out. The performance even with a high number of items is excellent. Mad props to the developer!",
+    "image": "https://i.pravatar.cc/100?img=52",
+    "id": "2",
+    "rating": 4
+  },
+  {
+    "name": "Aisha Alim",
+    "role": "Frequent Online Shopper",
+    "message": "I genuinely enjoyed browsing through the site. It was fast, clutter-free, and the product listings loaded instantly even with thousands of items. This is the kind of smooth shopping experience every customer looks for — well done!",
+    "image": "https://i.pravatar.cc/100?u=32",
+    "id": "3",
+    "rating": 5
+  }
+]

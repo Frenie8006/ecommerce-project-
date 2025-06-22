@@ -6,8 +6,19 @@ import NavBar from "../components/NavBar.jsx";
 import { useProducts } from "../../contexts/ProductsContext.jsx";
 import { useAuth } from "../../contexts/FakeAuthContext.jsx";
 import { useEffect } from "react";
-import Spinner from "../components/Spinner.jsx";
 import Footer from "../components/Footer.jsx";
+// import Spinner from "../components/Spinner.jsx";
+
+import undraw from "../assets/undraw.svg";
+import undrawCertificate from "../assets/undraw_certificate.svg";
+import undrawMap from "../assets/undraw_map.svg";
+import undrawPhone from "../assets/undraw_phone.svg";
+import undrawShopping from "../assets/undraw_shopping.svg";
+import businessInsider from "../assets/business-insider.png";
+import techCrunch from "../assets/techcrunch.png";
+import newYorkTimes from "../assets/the-new-york-times.png";
+import usaToday from "../assets/usa-today.png";
+import forbes from "../assets/forbes.png";
 
 const MAX_ITEMS = 8; // Maximum number of items to display
 
@@ -44,23 +55,17 @@ function Homepage() {
               <button onClick={handleClick}>Start Shopping</button>
             </div>
 
-            <img src="../public/undraw.svg" alt="Happy Shoppers" />
+            <img src={undraw} alt="Happy Shoppers" />
           </section>
 
           <section className={styles.homepage__featured}>
             <p>Trusted by millions, including renowned brands like...</p>
             <div>
-              <img
-                src="../public/business-insider.png"
-                alt="Business Insider"
-              />
-              <img src="../public/techcrunch.png" alt="TechCrunch" />
-              <img
-                src="../public/the-new-york-times.png"
-                alt="The New York Times"
-              />
-              <img src="../public/usa-today.png" alt="USA Today" />
-              <img src="../public/forbes.png" alt="Forbes" />
+              <img src={businessInsider} alt="Business Insider" />
+              <img src={techCrunch} alt="TechCrunch" />
+              <img src={newYorkTimes} alt="The New York Times" />
+              <img src={usaToday} alt="USA Today" />
+              <img src={forbes} alt="Forbes" />
             </div>
           </section>
         </section>
@@ -71,7 +76,7 @@ function Homepage() {
           <ul>
             <li>
               <div>
-                <img src="../public/undraw_certificate.svg" alt="Certificate" />
+                <img src={undrawCertificate} alt="Certificate" />
               </div>
               <h3>Reliability You Can Count On</h3>
               <p>
@@ -81,7 +86,7 @@ function Homepage() {
             </li>
             <li>
               <div>
-                <img src="../public/undraw_map.svg" alt="Map" />
+                <img src={undrawMap} alt="Map" />
               </div>
               <h3>Nationwide Accessibility</h3>
               <p>
@@ -91,14 +96,14 @@ function Homepage() {
             </li>
             <li>
               <div>
-                <img src="../public/undraw_phone.svg" alt="Phone" />
+                <img src={undrawPhone} alt="Phone" />
               </div>
               <h3>Seamless Mobile Experience</h3>
               <p>Enjoy shopping on the go with our intuitive mobile app.</p>
             </li>
             <li>
               <div>
-                <img src="../public/undraw_shopping.svg" alt="Shopping" />
+                <img src={undrawShopping} alt="Shopping" />
               </div>
               <h3>Uncompromised Quality</h3>
               <p>We prioritize excellence in every product we offer.</p>

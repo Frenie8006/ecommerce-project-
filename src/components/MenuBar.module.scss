@@ -1,0 +1,20 @@
+.menuBar {
+  background-color: transparent;
+  color: #eee;
+  font-size: 3rem;
+  display: none;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  @media only screen and (max-width: 46.56em) {
+    display: block;
+  }
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+}

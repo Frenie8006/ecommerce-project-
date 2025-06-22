@@ -1,28 +1,31 @@
-# 🛒 Shopping Cart Application
+# Verashop 🛒
 
-## Description
+A modern and minimalist e-commerce platform built with [React 19](https://reactjs.org/) and [Vite](https://vitejs.dev/), powered by custom global state using Context + Reducer.
 
-Build a simplified e-commerce platform where users can:
+## 🚀 Live Demo
 
-- Browse products
-- Add items to a cart
-- Proceed to checkout
+[👉 View Live](https://verashop.vercel.app)
 
-## Key Features
+## ⚙️ Tech Stack
 
-- **Navigation**: Use `react-router-dom` for navigating between pages like Home, Product Details, Cart, and Checkout.
-- **State Management**: Implement `useReducer` to manage cart state (e.g., adding/removing items, updating quantities).
-- **Global State**: Utilize the Context API to provide cart state and dispatch functions across components.
+- ⚛️ React 19
+- ⚡ Vite
+- 🔁 React Context API + useReducer
+- 🛠️ SCSS Modules
+- 📦 React Router DOM v7
+- 📋 ESLint
 
-## Learning Outcomes
+## 📦 Features
 
-- Gain an understanding of managing complex state transitions with `useReducer`.
-- Practice combining `useReducer` with Context API for global state management.
+- 🛍️ Add to Cart
+- 💳 Checkout with Balance Check
+- 📦 Product Inventory Management
+- 🔍 Product Search
+- 🧠 Global State with Context API
+- 📱 Responsive Design
 
-<!-- https://www.behance.net/gallery/221164361/Furniture-Customisation-Web-App-Vero?tracking_source=search_projects|ecommerce+web+design&l=1https://www.behance.net/gallery/221164361/Furniture-Customisation-Web-App-Vero?tracking_source=search_projects|ecommerce+web+design&l=1 -->
+## 📂 Project Structure
 
-<!-- https://undraw.co/illustrations/15 -->
-<!-- `https://calltoinspiration.com`/ -->
-<!-- https://lookup.design/ -->
+## Final Note
 
-<!-- roadmap.sh -->
+This project is still a work in progress. If you'd like to continue building or improving it, feel free to do so! Please note that there may be minor bugs in the cart or purchasing logic. Have fun exploring and enhancing the application.

@@ -17,7 +17,6 @@ const initialState = {
   error: "",
   carts: [],
   searchQuery: "",
-  productQuantity: 1,
 };
 
 function reducer(state, action) {
@@ -45,22 +44,28 @@ function reducer(state, action) {
       return {
         ...state,
         carts: action.payload,
-        products: state.products.map((product) => {
-          const cartItem = action.payload.find(
-            (cart) => cart.productId === product.id
-          );
+        // products: state.products.map((product) => {
+        //   const cartItem = action.payload.find(
+        //     (cart) => cart.productId === product.id
+        //   );
 
-          console.log(state.productQuantity);
-
-          if (cartItem) {
-            return {
-              ...product,
-              stock: Math.max(0, product.stock - state.productQuantity),
-            };
-          } else {
-            return product; // No cart item for this product, return unchanged
-          }
-        }),
+        //   if (cartItem) {
+        //     return {
+        //       ...product,
+        //       stock: Math.max(
+        //         0,
+        //         product.stock -
+        //           action.payload.reduce((acc, cart) => {
+        //             return cart.productId === product.id
+        //               ? acc + cart.quantity
+        //               : acc;
+        //           }, 0)
+        //       ),
+        //     };
+        //   } else {
+        //     return product; // No cart item for this product, return unchanged
+        //   }
+        // }),
       };
 
     case "cart/deleted":
@@ -86,24 +91,24 @@ function reducer(state, action) {
       return { ...state, searchQuery: action.payload };
 
     case "clearCart": {
-      // // Sum quantities for each productId in the cart
-      // const cartQuantities = state.carts.reduce((acc, cart) => {
-      //   acc[cart.productId] = (acc[cart.productId] || 0) + cart.quantity;
-      //   return acc;
-      // }, {});
+      // Sum quantities for each productId in the cart
+      const cartQuantities = state.carts.reduce((acc, cart) => {
+        acc[cart.productId] = (acc[cart.productId] || 0) + cart.quantity;
+        return acc;
+      }, {});
 
       return {
         ...state,
-        // products: state.products.map((product) => {
-        //   const totalCartQuantity = cartQuantities[product.id] || 0;
-        //   if (totalCartQuantity > 0) {
-        //     return {
-        //       ...product,
-        //       stock: product.stock - totalCartQuantity,
-        //     };
-        //   }
-        //   return product;
-        // }),
+        products: state.products.map((product) => {
+          const totalCartQuantity = cartQuantities[product.id] || 0;
+          if (totalCartQuantity > 0) {
+            return {
+              ...product,
+              stock: product.stock - totalCartQuantity,
+            };
+          }
+          return product;
+        }),
         carts: [],
       };
     }
@@ -126,9 +131,6 @@ function reducer(state, action) {
         products: updatedProducts,
       };
     }
-
-    case "product/quantity/set":
-      return { ...state, productQuantity: action.payload };
 
     case "rejected":
       return { ...state, isLoading: false, error: action.payload };
@@ -219,11 +221,6 @@ function ProductsProvider({ children }) {
     [selectedProduct]
   );
 
-  // My strange implementation of product quantity
-  const productQuantity = useCallback(function productQuantity(quantity) {
-    dispatch({ type: "product/quantity/set", payload: quantity });
-  }, []);
-
   const value = useMemo(() => {
     return {
       products,
@@ -241,7 +238,6 @@ function ProductsProvider({ children }) {
       searchQuery,
       deleteAllCarts,
       purchaseSelectedProduct,
-      productQuantity,
     };
   }, [
     addToCart,
@@ -251,7 +247,6 @@ function ProductsProvider({ children }) {
     isLoading,
     isLoadingProducts,
     isLoadingProduct,
-    productQuantity,
     purchaseSelectedProduct,
     searchQuery,
     selectedProduct,

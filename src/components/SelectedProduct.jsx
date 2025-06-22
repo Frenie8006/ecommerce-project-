@@ -15,7 +15,6 @@ function SelectedProduct() {
     addToCart,
     products,
     purchaseSelectedProduct,
-    productQuantity,
   } = useProducts();
   const { user, purchase } = useAuth();
   const navigate = useNavigate();
@@ -96,10 +95,6 @@ function SelectedProduct() {
     addToCart(cartItem);
     navigate("/products/cart");
   }
-
-  useEffect(() => {
-    productQuantity(quantity);
-  }, [quantity, productQuantity]);
 
   return (
     <div className={styles.selectedProduct}>
