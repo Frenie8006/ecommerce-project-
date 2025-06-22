@@ -1,0 +1,1 @@
+import{j as o,L as n}from"./index-Cr3RsN1l.js";const t="_logo_fn3wf_1",i={logo:t};function r({isLogo:s=!0,color:e="#d6dee0"}){return o.jsx(n,{to:"/",className:i.logo,children:o.jsxs("div",{style:{color:e},children:[s&&o.jsx("ion-icon",{name:"bag-check-outline"}),o.jsx("span",{children:"VeraShop"})]})})}export{r as L};
